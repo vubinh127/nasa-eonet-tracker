@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>GeoJSON Map | NASA EONET Tracker</title>
+  <meta name="description" content="Interactive map view for NASA EONET GeoJSON natural event data." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIINfQnPaU9sO83T28fygFbB2f/9aNzLTrA="
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="map-page">
+  <div class="stars-bg" aria-hidden="true"></div>
+
+  <header id="main-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo-wrap" aria-label="Back to EONET Natural Event Tracker Home">
+        <div class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="22" r="20" stroke="#00d4ff" stroke-width="1.5" opacity="0.4"/>
+            <circle cx="22" cy="22" r="15" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4 2"/>
+            <circle cx="22" cy="22" r="8" fill="#00d4ff" opacity="0.15"/>
+            <circle cx="22" cy="22" r="3" fill="#00d4ff"/>
+            <ellipse cx="22" cy="22" rx="20" ry="8" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
+            <circle cx="32" cy="12" r="3" fill="#ff6b35" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.5s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">EONET</span>
+          <span class="logo-sub">GeoJSON Map</span>
+        </div>
+      </a>
+
+      <div class="header-status" role="status" aria-live="polite">
+        <div class="status-indicator">
+          <div class="status-dot" aria-label="API Online"></div>
+          <span>API LIVE</span>
+        </div>
+        <div class="live-clock" id="map-clock" aria-label="Current UTC time">--:--:-- UTC</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="map-shell" role="main">
+    <section class="map-toolbar" aria-label="GeoJSON map controls">
+      <div>
+        <p class="map-kicker">// EVENTS GEOJSON MAP</p>
+        <h1 class="map-title">NASA EONET Live Map</h1>
+      </div>
+
+      <div class="map-controls">
+        <select id="map-status" class="filter-select" aria-label="Filter map by event status">
+          <option value="all">All Statuses</option>
+          <option value="open">Active Only</option>
+          <option value="closed">Closed Only</option>
+        </select>
+
+        <select id="map-category" class="filter-select" aria-label="Filter map by category">
+          <option value="">All Categories</option>
+        </select>
+
+        <select id="map-limit" class="filter-select" aria-label="Limit map results">
+          <option value="50" selected>50 Events</option>
+          <option value="100">100 Events</option>
+          <option value="200">200 Events</option>
+        </select>
+
+        <button class="btn-filter" id="map-refresh" type="button">
+          <span>REFRESH</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="map-stage" aria-label="Interactive GeoJSON event map">
+      <div id="eonet-map" role="application" aria-label="NASA EONET GeoJSON interactive map"></div>
+      <div class="map-status-panel" id="map-status-panel" role="status" aria-live="polite">
+        Loading GeoJSON...
+      </div>
+    </section>
+  </main>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="assets/js/map.js" defer></script>
+</body>
+</html>

@@ -174,6 +174,7 @@
       <button class="view-tab" type="button" data-view-target="categories-view">Categories</button>
       <button class="view-tab" type="button" data-view-target="layers-view">Layers</button>
       <button class="view-tab" type="button" data-view-target="geojson-view">GeoJSON</button>
+      <a class="view-link" href="map.html" aria-label="Open GeoJSON map page">Map</a>
     </nav>
 
     <div id="events-view" class="data-view active">
@@ -275,7 +276,10 @@
     <section id="geojson-view" class="data-view api-panel" aria-label="EONET GeoJSON explorer">
       <div class="section-header">
         <h2 class="section-title">// EVENTS GEOJSON API</h2>
-        <span class="event-count" id="geojson-count">Loading...</span>
+        <div class="section-actions">
+          <a class="inline-link action-link" href="map.html">OPEN MAP</a>
+          <span class="event-count" id="geojson-count">Loading...</span>
+        </div>
       </div>
       <div class="geojson-layout">
         <div class="geojson-summary" id="geojson-summary"></div>
