@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- ======= PRIMARY SEO ======= -->
+  <title>NASA EONET Tracker | Real-Time Natural Event Dashboard</title>
+  <meta name="description" content="NASA EONET Tracker is a real-time natural event dashboard powered by NASA EONET API v3. Explore wildfires, storms, volcanoes, earthquakes, categories, layers, and GeoJSON event data." />
+  <meta name="keywords" content="NASA EONET Tracker, NASA EONET API, natural event tracker, Earth Observatory, wildfires, volcanoes, earthquakes, storms, floods, GeoJSON, API v3" />
+  <meta name="author" content="vubinh127" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://nasa-eonet-tracker.netlify.app/" />
+
+  <!-- ======= OPEN GRAPH (Facebook/LinkedIn) ======= -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="NASA EONET Tracker | Real-Time Natural Event Dashboard" />
+  <meta property="og:description" content="Explore real-time natural events worldwide using NASA EONET API v3, including categories, layers, and GeoJSON event data." />
+  <meta property="og:url" content="https://nasa-eonet-tracker.netlify.app/" />
+  <meta property="og:site_name" content="NASA EONET Tracker" />
+  <meta property="og:image" content="assets/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- ======= TWITTER CARD ======= -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NASA EONET Tracker | Real-Time Natural Event Dashboard" />
+  <meta name="twitter:description" content="Track wildfires, storms, volcanoes, earthquakes, categories, layers, and GeoJSON data with NASA EONET API v3." />
+  <meta name="twitter:image" content="assets/images/og-image.jpg" />
+  <meta name="twitter:site" content="@NASA" />
+
+  <!-- ======= STRUCTURED DATA (JSON-LD) ======= -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "NASA EONET Tracker",
+    "description": "A real-time natural event dashboard powered by NASA EONET API v3 for exploring events, categories, layers, and GeoJSON data.",
+    "url": "https://nasa-eonet-tracker.netlify.app/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "NASA",
+      "url": "https://www.nasa.gov",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg"
+      }
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "vubinh127",
+      "url": "https://github.com/vubinh127"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Natural Events",
+      "description": "Wildfires, Volcanoes, Severe Storms, Earthquakes, Floods, and other natural events tracked globally"
+    }
+  }
+  </script>
+
+  <!-- ======= FAVICON ======= -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- ======= FONTS ======= -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- ======= STYLES ======= -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <!-- Stars Background -->
+  <div class="stars-bg" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SKIP TO MAIN (Accessibility)
+       ============================================================ -->
+  <a href="#main-content" class="visually-hidden" style="position:absolute;left:-9999px;top:0;z-index:9999;background:var(--accent-primary);color:#000;padding:0.5rem 1rem;font-family:var(--font-mono);font-size:0.8rem;">Skip to main content</a>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header id="main-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="logo-wrap" aria-label="EONET Natural Event Tracker Home">
+        <!-- SVG Earth Icon -->
+        <div class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="22" r="20" stroke="#00d4ff" stroke-width="1.5" opacity="0.4"/>
+            <circle cx="22" cy="22" r="15" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4 2"/>
+            <circle cx="22" cy="22" r="8" fill="#00d4ff" opacity="0.15"/>
+            <circle cx="22" cy="22" r="3" fill="#00d4ff"/>
+            <!-- Orbit lines -->
+            <ellipse cx="22" cy="22" rx="20" ry="8" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
+            <!-- Blink dot -->
+            <circle cx="32" cy="12" r="3" fill="#ff6b35" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.5s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">EONET</span>
+          <span class="logo-sub">NASA Earth Observatory</span>
+        </div>
+      </a>
+
+      <div class="header-status" role="status" aria-live="polite">
+        <div class="status-indicator">
+          <div class="status-dot" aria-label="API Online"></div>
+          <span>API LIVE</span>
+        </div>
+        <div class="live-clock" id="live-clock" aria-label="Current UTC time">--:--:-- UTC</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main id="main-content" role="main">
+
+    <!-- HERO -->
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="hero-eyebrow" aria-hidden="true">
+        NASA · EONET API v3 · Real-Time Data
+      </div>
+      <h1 class="hero-title" id="hero-title">
+        NASA EONET<br>Tracker
+      </h1>
+      <p class="hero-desc">
+        Real-time satellite surveillance of natural phenomena worldwide.
+        Powered by NASA's EONET API — tracking wildfires, volcanoes,
+        severe storms, and more across our planet's surface.
+      </p>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-row" aria-label="Event Statistics" role="region">
+      <div class="stat-card" role="figure" aria-label="Total events">
+        <span class="stat-value" id="stat-total">–</span>
+        <span class="stat-label">Total Events</span>
+      </div>
+      <div class="stat-card" role="figure" aria-label="Active events">
+        <span class="stat-value" id="stat-open">–</span>
+        <span class="stat-label">Active Events</span>
+      </div>
+      <div class="stat-card" role="figure" aria-label="Closed events">
+        <span class="stat-value" id="stat-closed">–</span>
+        <span class="stat-label">Closed Events</span>
+      </div>
+      <div class="stat-card" role="figure" aria-label="Categories tracked">
+        <span class="stat-value" id="stat-categories">–</span>
+        <span class="stat-label">Categories</span>
+      </div>
+    </section>
+
+    <!-- DATA VIEWS -->
+    <nav class="view-tabs" aria-label="EONET data views">
+      <button class="view-tab active" type="button" data-view-target="events-view">Events</button>
+      <button class="view-tab" type="button" data-view-target="categories-view">Categories</button>
+      <button class="view-tab" type="button" data-view-target="layers-view">Layers</button>
+      <button class="view-tab" type="button" data-view-target="geojson-view">GeoJSON</button>
+    </nav>
+
+    <div id="events-view" class="data-view active">
+    <!-- FILTERS -->
+    <section class="filter-section" aria-label="Event Filters">
+      <div class="filter-bar" role="search">
+        <span class="filter-label">// FILTER</span>
+
+        <select id="filter-category" class="filter-select" aria-label="Filter by category">
+          <option value="">All Categories</option>
+        </select>
+
+        <select id="filter-status" class="filter-select" aria-label="Filter by status">
+          <option value="">All Statuses</option>
+          <option value="open">Active Only</option>
+          <option value="closed">Closed Only</option>
+        </select>
+
+        <input
+          type="search"
+          id="filter-search"
+          class="filter-input"
+          placeholder="Search events..."
+          aria-label="Search events by name"
+          autocomplete="off"
+          spellcheck="false"
+        />
+
+        <button class="btn-filter" id="btn-apply" aria-label="Apply filters">
+          <span>⚡ APPLY</span>
+        </button>
+
+        <button class="btn-reset" id="btn-reset" aria-label="Reset all filters">
+          RESET
+        </button>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="events-section" aria-label="Natural Events List">
+      <div class="section-header">
+        <h2 class="section-title">// TRACKING EVENTS</h2>
+        <span class="event-count" id="event-count" aria-live="polite">Loading...</span>
+      </div>
+
+      <!-- LOADER -->
+      <div id="loader" role="status" aria-label="Loading events">
+        <div class="loader-container" aria-hidden="true">
+          <div class="loader-ring"></div>
+          <div class="loader-ring-2"></div>
+        </div>
+        <span class="loader-text">FETCHING SATELLITE DATA...</span>
+      </div>
+
+      <!-- ERROR STATE -->
+      <div id="error-state" class="error-state" role="alert" aria-live="assertive">
+        <span class="error-code">503</span>
+        <p class="error-msg">// CONNECTION TO NASA API FAILED</p>
+        <button class="btn-retry" id="btn-retry" aria-label="Retry loading events">
+          ↻ RETRY CONNECTION
+        </button>
+      </div>
+
+      <!-- EVENTS GRID -->
+      <div
+        id="events-grid"
+        style="display:none;"
+        role="list"
+        aria-label="Natural events list"
+      ></div>
+
+      <!-- PAGINATION -->
+      <nav id="pagination" class="pagination-wrap" aria-label="Events pagination" role="navigation"></nav>
+    </section>
+    </div>
+
+    <section id="categories-view" class="data-view api-panel" aria-label="EONET categories">
+      <div class="section-header">
+        <h2 class="section-title">// CATEGORIES API</h2>
+        <span class="event-count" id="categories-count">Loading...</span>
+      </div>
+      <div id="categories-grid" class="info-grid" role="list"></div>
+    </section>
+
+    <section id="layers-view" class="data-view api-panel" aria-label="EONET layers">
+      <div class="section-header">
+        <h2 class="section-title">// LAYERS API</h2>
+        <span class="event-count" id="layers-count">Loading...</span>
+      </div>
+      <div class="filter-bar compact-filter">
+        <span class="filter-label">// CATEGORY</span>
+        <select id="layers-category-filter" class="filter-select" aria-label="Filter layers by category">
+          <option value="">All Categories</option>
+        </select>
+      </div>
+      <div id="layers-grid" class="info-grid" role="list"></div>
+    </section>
+
+    <section id="geojson-view" class="data-view api-panel" aria-label="EONET GeoJSON explorer">
+      <div class="section-header">
+        <h2 class="section-title">// EVENTS GEOJSON API</h2>
+        <span class="event-count" id="geojson-count">Loading...</span>
+      </div>
+      <div class="geojson-layout">
+        <div class="geojson-summary" id="geojson-summary"></div>
+        <pre class="json-preview" id="geojson-preview" aria-label="GeoJSON response preview"></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       MODAL
+       ============================================================ -->
+  <div
+    id="event-modal"
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-body"
+  >
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title">Event Details</h2>
+        <button class="modal-close" id="modal-close" aria-label="Close event details">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-text">
+        Data powered by&nbsp;
+        <a href="https://eonet.gsfc.nasa.gov/api/v3/events" target="_blank" rel="noopener noreferrer" aria-label="NASA EONET API">
+          NASA EONET API v3
+        </a>
+        &nbsp;·&nbsp;
+        <a href="https://eonet.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer">
+          eonet.gsfc.nasa.gov
+        </a>
+      </div>
+      <div class="footer-text">
+        &copy; <span id="year"></span> Earth Observatory Natural Event Tracker
+      </div>
+      <div class="footer-text">
+        Interface developed by&nbsp;
+        <a href="https://github.com/vubinh127" target="_blank" rel="noopener noreferrer">vubinh127</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======= SCRIPTS ======= -->
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/categories-screen.js" defer></script>
+  <script src="assets/js/layers-screen.js" defer></script>
+  <script src="assets/js/geojson-screen.js" defer></script>
+</body>
+</html>
